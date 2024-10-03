@@ -1,4 +1,7 @@
-# PERFORCE_OCI
+# PERFORCE-OCI
+
+
+![GitHub](https://img.shields.io/github/license/JarnotMaciej/perforce-oci?style=flat-square) ![GitHub](https://img.shields.io/github/languages/top/JarnotMaciej/perforce-oci?style=flat-square) ![GitHub](https://img.shields.io/github/languages/code-size/JarnotMaciej/perforce-oci?style=flat-square) 
 
 OCI Image for Quick Game Development
 
