@@ -1,6 +1,9 @@
 # Use Ubuntu Jammy as the base image
 FROM ubuntu:jammy
 
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
     wget \
@@ -22,8 +25,11 @@ RUN /root/p4setup.sh
 RUN apt-get update && apt-get install -y helix-p4d
 
 # Set environment variables
-ENV P4PORT=ssl:127.0.0.1:1666
+ENV P4PORT=ssl:1666
 ENV P4USER=super
+
+# Create volume mount point for persistent data
+VOLUME ["/opt/perforce/servers"]
 
 # Copy a script to run configuration commands
 COPY configure_p4.sh /root/configure_p4.sh
@@ -32,8 +38,12 @@ RUN chmod +x /root/configure_p4.sh
 # Expose the Perforce port
 EXPOSE 1666
 
+# Copy the entrypoint script
+COPY entrypoint.sh /root/entrypoint.sh
+RUN chmod +x /root/entrypoint.sh
+
 # Set the entrypoint to run the Perforce server and configuration
-ENTRYPOINT ["/bin/bash", "-c", "/opt/perforce/sbin/configure-helix-p4d.sh copybara && /root/configure_p4.sh && tail -f /dev/null"]
+ENTRYPOINT ["/root/entrypoint.sh"]
 
 # Instructions to build and run:
 # Build: docker build -t perforce-helix .

@@ -21,15 +21,16 @@ This project provides an OCI (Open Container Initiative) image for setting up a 
   ```
   docker build -t perforce-game-dev .
   ```
-- And then run the container:
+- And then run the container with persistent storage:
   ```
-  docker run -d -p 1666:1666 --name perforce-server perforce-game-dev
+  docker run -d -p 1666:1666 -v perforce-data:/opt/perforce/servers --name perforce-server perforce-game-dev
   ```
 
 # USAGE INSTRUCTION
 - Access the Perforce server using the following credentials:
   - P4PORT: ssl:127.0.0.1:1666
   - P4USER: super
+  - P4PASSWD: Password123!
 - Connect to the server using Perforce command-line tools or P4V (Perforce Visual Client)
 - The server is pre-configured with optimized settings for game development:
   - Server refresh rate is set to 10 seconds

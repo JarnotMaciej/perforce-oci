@@ -1,4 +1,4 @@
-p4 protect
+p4 protect -o | p4 protect -i
 p4 property -a -n P4V.Performance.ServerRefresh -v 10
 p4 property -a -n P4V.Performance.AllowFullIstats -v Off
 p4 property -a -n P4V.Performance.ReconnectInterval -v 300
